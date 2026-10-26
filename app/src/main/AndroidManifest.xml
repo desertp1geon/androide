@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ISCIP">
         <activity
-            android:name=".MainActivity"
+            android:name=".factivity.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.ISCIP"
@@ -24,9 +24,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SecondActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:name=".sactivity.FruitInfoActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

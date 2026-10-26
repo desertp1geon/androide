@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="Theme.ISCIP" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.ISCIP" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#3D7048</item>
+        <item name="colorPrimaryDark">#203D2A</item>
+        <item name="colorAccent">#3D7048</item>
+    </style>
 </resources>

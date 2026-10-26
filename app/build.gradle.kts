@@ -4,6 +4,7 @@ plugins {
 }
 
 android {
+
     namespace = "com.example.iscip"
     compileSdk {
         version = release(37)
@@ -32,6 +33,7 @@ android {
     }
     buildFeatures {
         compose = true
+        dataBinding = true
     }
 }
 
