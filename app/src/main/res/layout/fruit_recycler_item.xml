@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_margin="8dp"
+    android:background="#E5EEDC">
+
+    <TextView
+        android:id="@+id/fruitItemName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Назва фрукта"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#203D2A" />
+
+    <TextView
+        android:id="@+id/fruitItemType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Категорія"
+        android:textSize="16sp"
+        android:textColor="#3D7048" />
+
+    <TextView
+        android:id="@+id/fruitItemCalories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="52 ккал / 100 г"
+        android:textSize="14sp"
+        android:textColor="#6B756B" />
+
+</LinearLayout>

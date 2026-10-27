@@ -1,4 +1,3 @@
-
 package com.example.iscip.factivity;
 
 import android.content.Intent;
@@ -10,21 +9,21 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.iscip.sactivity.FruitInfoActivity;
 import com.example.iscip.databinding.ActivityMainBinding;
-import com.example.iscip.model.Fruit;
+import com.example.iscip.data.Fruit;
+import com.example.iscip.data.FruitRepository;
+import com.example.iscip.data.FruitDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private MainActivityViewModel viewModel;
+    private FruitRepository fruitRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMainBinding.inflate(
-                getLayoutInflater()
-        );
-
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         viewModel = new ViewModelProvider(this)
@@ -32,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
 
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
+
+        // Створюємо репозиторій
+        fruitRepository = FruitDatabase.getInstance(getApplicationContext());
 
         observeViewModel();
     }
@@ -53,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
                 ).show();
 
             } else if (model.isNavigateToNext()) {
-                // Спочатку створюємо копію даних фрукта.
                 Fruit fruit = new Fruit(
+                        0,
                         model.getName().trim(),
                         model.getType().trim(),
                         model.getDescription().trim(),

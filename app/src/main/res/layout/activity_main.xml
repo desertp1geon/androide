@@ -7,171 +7,58 @@
             type="com.example.iscip.factivity.MainActivityViewModel" />
     </data>
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:background="#F7F6EF">
+        android:orientation="vertical"
+        android:background="#F7F6EF"
+        android:padding="20dp">
 
-        <LinearLayout
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FRUITIFY"
+            android:textColor="#3D7048"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="24dp">
+            android:layout_marginTop="16dp"
+            android:text="Fruit World"
+            android:textColor="#203D2A"
+            android:textSize="32sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="FRUITIFY"
-                android:textColor="#3D7048"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Your fruit collection"
+            android:textColor="#6B756B"
+            android:textSize="16sp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Fruit World"
-                android:textColor="#203D2A"
-                android:textSize="32sp"
-                android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:padding="16dp"
+            android:background="#E5EEDC"
+            android:gravity="center"
+            android:text="FRUIT COLLECTION"
+            android:textColor="#203D2A"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Create your own fruit card"
-                android:textColor="#6B756B"
-                android:textSize="16sp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fruitsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="16dp"
+            android:clipToPadding="false"
+            android:paddingBottom="12dp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:background="#E5EEDC"
-                android:gravity="center"
-                android:padding="18dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="FRUIT COLLECTION"
-                    android:textColor="#203D2A"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:background="#FFFFFF"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Fruit name"
-                    android:textColor="#203D2A"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/nameInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:hint="For example, Mango"
-                    android:singleLine="true"
-                    android:inputType="textCapSentences"
-                    android:textColor="#203D2A"
-                    android:textColorHint="#9AA399"
-                    android:text="@={viewModel.fruitModel.name}" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:text="Category"
-                    android:textColor="#203D2A"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/typeInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:hint="For example, Tropical"
-                    android:singleLine="true"
-                    android:inputType="textCapSentences"
-                    android:text="@={viewModel.fruitModel.type}" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:text="Description"
-                    android:textColor="#203D2A"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/descriptionInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:hint="Describe this fruit"
-                    android:gravity="top"
-                    android:minLines="3"
-                    android:maxLines="5"
-                    android:inputType="textCapSentences|textMultiLine"
-                    android:text="@={viewModel.fruitModel.description}" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:text="Calories (kcal per 100 g)"
-                    android:textColor="#203D2A"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/caloriesInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:hint="For example, 60"
-                    android:singleLine="true"
-                    android:inputType="number"
-                    android:text="@={viewModel.fruitModel.calories}" />
-
-                <Button
-                    android:id="@+id/nextButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_marginTop="26dp"
-                    android:backgroundTint="#3D7048"
-                    android:text="Create fruit card"
-                    android:textAllCaps="false"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:onClick="@{(view) -> viewModel.onNextButtonClicked(view)}" />
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:gravity="center"
-                android:text="Your collection of healthy flavors"
-                android:textColor="#7A8478"
-                android:textSize="13sp" />
-
-        </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 </layout>

@@ -1,8 +1,8 @@
-
-package com.example.iscip.model;
+package com.example.iscip.data;
 
 public class Fruit {
 
+    private int id;
     private String name;
     private String type;
     private String description;
@@ -11,12 +11,21 @@ public class Fruit {
     public Fruit() {
     }
 
-    public Fruit(String name, String type,
+    public Fruit(int id, String name, String type,
                  String description, String calories) {
+        this.id = id;
         this.name = name;
         this.type = type;
         this.description = description;
         this.calories = calories;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
