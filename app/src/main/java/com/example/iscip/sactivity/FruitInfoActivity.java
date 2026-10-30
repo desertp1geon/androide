@@ -3,6 +3,7 @@ package com.example.iscip.sactivity;
 
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,6 +30,8 @@ public class FruitInfoActivity extends AppCompatActivity {
         TextView caloriesText =
                 findViewById(R.id.fruitCalories);
 
+        Button backButton = findViewById(R.id.backButton);
+
         nameText.setText(name == null ? "Фрукт" : name);
         typeText.setText(type == null ? "" : type);
         descriptionText.setText(
@@ -37,5 +40,7 @@ public class FruitInfoActivity extends AppCompatActivity {
         caloriesText.setText(
                 calories == null ? "—" : calories + " ккал / 100 г"
         );
+
+        backButton.setOnClickListener(v -> finish());
     }
 }

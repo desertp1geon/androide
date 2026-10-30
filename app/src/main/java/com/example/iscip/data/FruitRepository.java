@@ -1,6 +1,6 @@
 package com.example.iscip.data;
 
-import com.example.iscip.concurency.TaskCallback;
+import com.example.iscip.basic.concurency.concurency.TaskCallback;
 
 import java.util.List;
 

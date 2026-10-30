@@ -1,46 +1,54 @@
 
 package com.example.iscip.factivity;
 
-import android.view.View;
-
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.iscip.data.Fruit;
+import com.example.iscip.data.FruitRepository;
+import com.example.iscip.basic.concurency.concurency.TaskCallback;
+import com.example.iscip.basic.concurency.concurency.Fault;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivityViewModel extends ViewModel {
 
-    private final MutableLiveData<MainActivityFruitModel>
-            fruitModel = new MutableLiveData<>();
+    private final FruitRepository fruitRepository;
 
-    public MainActivityViewModel() {
-        fruitModel.setValue(new MainActivityFruitModel());
+    private final MutableLiveData<List<Fruit>> fruits =
+            new MutableLiveData<>(new ArrayList<>());
+
+    private final MutableLiveData<String> errorMessage =
+            new MutableLiveData<>();
+
+    public MainActivityViewModel(FruitRepository fruitRepository) {
+        this.fruitRepository = fruitRepository;
     }
 
-    public MutableLiveData<MainActivityFruitModel>
-    getFruitModel() {
-        return fruitModel;
+    public MutableLiveData<List<Fruit>> getFruits() {
+        return fruits;
     }
 
-    public void onNextButtonClicked(View v) {
-        MainActivityFruitModel model = fruitModel.getValue();
+    public MutableLiveData<String> getErrorMessage() {
+        return errorMessage;
+    }
 
-        if (model == null) {
-            return;
-        }
+    public void loadFruits() {
 
-        boolean hasEmptyFields =
-                model.getName().trim().isEmpty()
-                        || model.getType().trim().isEmpty()
-                        || model.getDescription().trim().isEmpty()
-                        || model.getCalories().trim().isEmpty();
+        fruitRepository.getAll(new TaskCallback<List<Fruit>>() {
 
-        if (hasEmptyFields) {
-            model.setNavigateToNext(false);
-            model.setShowError(true);
-        } else {
-            model.setShowError(false);
-            model.setNavigateToNext(true);
-        }
+            @Override
+            public void onComplete(List<Fruit> result) {
+                fruits.postValue(result);
+            }
 
-        fruitModel.setValue(model);
+            @Override
+            public void onError(Fault fault) {
+                errorMessage.postValue(
+                        "Не вдалося завантажити колекцію"
+                );
+            }
+        });
     }
 }

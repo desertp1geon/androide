@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data>
-        <variable
-            name="viewModel"
-            type="com.example.iscip.factivity.MainActivityViewModel" />
-    </data>
+    <data />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Fruit World"
+            android:text="Fruit Collection"
             android:textColor="#203D2A"
             android:textSize="32sp"
             android:textStyle="bold" />
@@ -35,21 +31,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Your fruit collection"
+            android:text="Your collection of healthy flavors"
             android:textColor="#6B756B"
             android:textSize="16sp" />
 
+        <Button
+            android:id="@+id/addFruitButton"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="#3D7048"
+            android:text="+ Add Fruit"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
         <TextView
+            android:id="@+id/emptyText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:padding="16dp"
-            android:background="#E5EEDC"
+            android:layout_marginTop="32dp"
             android:gravity="center"
-            android:text="FRUIT COLLECTION"
-            android:textColor="#203D2A"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:text="Your collection is empty.\nAdd your first fruit!"
+            android:textColor="#7A8478"
+            android:textSize="16sp"
+            android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fruitsRecyclerView"
@@ -61,4 +68,5 @@
             android:paddingBottom="12dp" />
 
     </LinearLayout>
+
 </layout>

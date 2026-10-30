@@ -1,91 +1,124 @@
+
 package com.example.iscip.factivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
+import static org.koin.java.KoinJavaComponent.get;
 
-import com.example.iscip.sactivity.FruitInfoActivity;
-import com.example.iscip.databinding.ActivityMainBinding;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.example.iscip.basic.mvvm.BaseActivity;
 import com.example.iscip.data.Fruit;
-import com.example.iscip.data.FruitRepository;
-import com.example.iscip.data.FruitDatabase;
+import com.example.iscip.databinding.ActivityMainBinding;
+import com.example.iscip.sactivity.FruitInfoActivity;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.List;
+
+public class MainActivity extends BaseActivity {
 
     private ActivityMainBinding binding;
     private MainActivityViewModel viewModel;
-    private FruitRepository fruitRepository;
+    private FruitAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        viewModel = get(MainActivityViewModel.class);
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        viewModel = new ViewModelProvider(this)
-                .get(MainActivityViewModel.class);
-
-        binding.setViewModel(viewModel);
-        binding.setLifecycleOwner(this);
-
-        // Створюємо репозиторій
-        fruitRepository = FruitDatabase.getInstance(getApplicationContext());
-
+        setupRecyclerView();
+        setupButtons();
         observeViewModel();
+
+        viewModel.loadFruits();
+    }
+
+    private void setupRecyclerView() {
+
+        adapter = new FruitAdapter(this::openFruitInfo);
+
+        binding.fruitsRecyclerView.setLayoutManager(
+                new LinearLayoutManager(this)
+        );
+
+        binding.fruitsRecyclerView.setAdapter(adapter);
+    }
+
+    private void setupButtons() {
+
+        binding.addFruitButton.setOnClickListener(v -> {
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    AddFruitActivity.class
+            );
+
+            startActivity(intent);
+        });
     }
 
     private void observeViewModel() {
-        viewModel.getFruitModel().observe(this, model -> {
-            if (model == null) {
+
+        viewModel.getFruits().observe(this, fruits -> {
+
+            if (fruits == null) {
                 return;
             }
 
-            if (model.isShowError()) {
-                model.setShowError(false);
-                viewModel.getFruitModel().setValue(model);
+            adapter.setFruits(fruits);
 
+            if (fruits.isEmpty()) {
+                binding.emptyText.setVisibility(View.VISIBLE);
+                binding.fruitsRecyclerView.setVisibility(View.GONE);
+            } else {
+                binding.emptyText.setVisibility(View.GONE);
+                binding.fruitsRecyclerView.setVisibility(View.VISIBLE);
+            }
+        });
+
+        viewModel.getErrorMessage().observe(this, message -> {
+
+            if (message != null) {
                 Toast.makeText(
                         this,
-                        "Будь ласка, заповніть усі поля",
+                        message,
                         Toast.LENGTH_SHORT
                 ).show();
-
-            } else if (model.isNavigateToNext()) {
-                Fruit fruit = new Fruit(
-                        0,
-                        model.getName().trim(),
-                        model.getType().trim(),
-                        model.getDescription().trim(),
-                        model.getCalories().trim()
-                );
-
-                // Скидаємо прапорець, щоб не повторити перехід.
-                model.setNavigateToNext(false);
-                viewModel.getFruitModel().setValue(model);
-
-                openFruitInfo(fruit);
             }
         });
     }
 
     private void openFruitInfo(Fruit fruit) {
+
         Intent intent = new Intent(
                 MainActivity.this,
                 FruitInfoActivity.class
         );
 
+        intent.putExtra("fruit_id", fruit.getId());
         intent.putExtra("fruit_name", fruit.getName());
         intent.putExtra("fruit_type", fruit.getType());
-        intent.putExtra(
-                "fruit_description",
-                fruit.getDescription()
-        );
+        intent.putExtra("fruit_description", fruit.getDescription());
         intent.putExtra("fruit_calories", fruit.getCalories());
 
         startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (viewModel != null) {
+            viewModel.loadFruits();
+        }
+    }
+
+    @Override
+    public void onCloseScope() {
     }
 }

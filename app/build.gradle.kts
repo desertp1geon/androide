@@ -28,8 +28,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
     buildFeatures {
         compose = true
@@ -38,6 +38,10 @@ android {
 }
 
 dependencies {
+    implementation("io.insert-koin:koin-core:4.1.0")
+    implementation("io.insert-koin:koin-android:4.1.0")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+
     implementation("androidx.room:room-runtime:2.6.1")
     annotationProcessor("androidx.room:room-compiler:2.6.1")
     implementation("androidx.recyclerview:recyclerview:1.3.2")

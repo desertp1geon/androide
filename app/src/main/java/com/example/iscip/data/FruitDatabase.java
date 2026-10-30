@@ -1,11 +1,12 @@
+
 package com.example.iscip.data;
 
 import android.content.Context;
 
 import androidx.room.Room;
 
-import com.example.iscip.concurency.Fault;
-import com.example.iscip.concurency.TaskCallback;
+import com.example.iscip.basic.concurency.concurency.Fault;
+import com.example.iscip.basic.concurency.concurency.TaskCallback;
 import com.example.iscip.data.mappers.FruitMappers;
 import com.example.iscip.data.room.AppDatabase;
 import com.example.iscip.data.room.FruitEntity;
@@ -16,12 +17,10 @@ import java.util.concurrent.Executors;
 
 public class FruitDatabase implements FruitRepository {
 
-    private static volatile FruitDatabase instance;
-
     private final AppDatabase appDatabase;
     private final ExecutorService executorService;
 
-    private FruitDatabase(Context context) {
+    public FruitDatabase(Context context) {
         Context appContext = context.getApplicationContext();
 
         appDatabase = Room.databaseBuilder(
@@ -33,18 +32,6 @@ public class FruitDatabase implements FruitRepository {
         executorService = Executors.newSingleThreadExecutor();
     }
 
-    public static FruitDatabase getInstance(Context context) {
-        if (instance == null) {
-            synchronized (FruitDatabase.class) {
-                if (instance == null) {
-                    instance = new FruitDatabase(context);
-                }
-            }
-        }
-
-        return instance;
-    }
-
     @Override
     public void getAll(TaskCallback<List<Fruit>> callback) {
         executorService.execute(() -> {
@@ -54,6 +41,7 @@ public class FruitDatabase implements FruitRepository {
 
                 List<Fruit> fruits =
                         FruitMappers.toDomainList(entities);
+
                 callback.onComplete(fruits);
 
             } catch (Exception exception) {

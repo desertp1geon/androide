@@ -1,4 +1,4 @@
-package com.example.iscip.concurency;
+package com.example.iscip.basic.concurency.concurency;
 
 public class Fault {
 
