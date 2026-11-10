@@ -5,6 +5,7 @@ import com.example.iscip.data.FruitDatabase
 import com.example.iscip.data.FruitRepository
 import com.example.iscip.factivity.AddFruitViewModel
 import com.example.iscip.factivity.MainActivityViewModel
+import org.koin.android.ext.koin.androidContext
 
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -13,7 +14,7 @@ import org.koin.dsl.module
 val koinModule = module {
 
     single<FruitRepository> {
-        FruitDatabase(get())
+        FruitDatabase(androidContext())
     }
 
     viewModel {

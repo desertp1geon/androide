@@ -66,4 +66,10 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
+
+    testImplementation("org.mockito:mockito-core:5.7.0")
+    androidTestImplementation("org.mockito:mockito-android:5.7.0")
+    testImplementation("net.bytebuddy:byte-buddy:1.17.8")
+    testImplementation("net.bytebuddy:byte-buddy-agent:1.17.8")
+    androidTestImplementation("androidx.arch.core:core-testing:2.2.0")
 }

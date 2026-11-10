@@ -41,8 +41,8 @@ public class AddFruitViewModel extends ViewModel {
         return errorMessage;
     }
 
-    public void onSaveButtonClicked(View v) {
 
+    public void onSaveButtonClicked(View v) {
         MainActivityFruitModel model = fruitModel.getValue();
 
         if (model == null) {
@@ -69,19 +69,21 @@ public class AddFruitViewModel extends ViewModel {
                 model.getCalories().trim()
         );
 
-        fruitRepository.add(fruit, new TaskCallback<Void>() {
-
+        fruitRepository.add(fruit, new TaskCallback<Boolean>() {
             @Override
-            public void onComplete(Void result) {
-                saveSuccess.postValue(true);
+            public void onComplete(Boolean result) {
+                if (Boolean.TRUE.equals(result)) {
+                    saveSuccess.postValue(true);
+                } else {
+                    errorMessage.postValue("Не вдалося зберегти фрукт");
+                }
             }
 
             @Override
             public void onError(Fault fault) {
-                errorMessage.postValue(
-                        "Не вдалося зберегти фрукт"
-                );
+                errorMessage.postValue("Не вдалося зберегти фрукт");
             }
         });
     }
+
 }

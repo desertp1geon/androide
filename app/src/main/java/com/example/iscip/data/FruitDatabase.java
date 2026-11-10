@@ -32,6 +32,12 @@ public class FruitDatabase implements FruitRepository {
         executorService = Executors.newSingleThreadExecutor();
     }
 
+    // for test
+    public FruitDatabase(AppDatabase appDatabase) {
+        this.appDatabase = appDatabase;
+        this.executorService = Executors.newSingleThreadExecutor();
+    }
+
     @Override
     public void getAll(TaskCallback<List<Fruit>> callback) {
         executorService.execute(() -> {
@@ -53,22 +59,15 @@ public class FruitDatabase implements FruitRepository {
     }
 
     @Override
-    public void add(Fruit fruit, TaskCallback<Void> callback) {
+    public void add(Fruit fruit, TaskCallback<Boolean> callback) {
         executorService.execute(() -> {
             try {
-                FruitEntity entity =
-                        FruitMappers.toEntity(fruit);
+                FruitEntity entity = FruitMappers.toEntity(fruit);
 
                 long insertedId =
                         appDatabase.fruitDAO().insert(entity);
 
-                if (insertedId > 0) {
-                    callback.onComplete(null);
-                } else {
-                    callback.onError(
-                            new Fault("Не вдалося зберегти фрукт")
-                    );
-                }
+                callback.onComplete(insertedId > 0);
 
             } catch (Exception exception) {
                 callback.onError(
@@ -76,5 +75,9 @@ public class FruitDatabase implements FruitRepository {
                 );
             }
         });
+    }
+    public void close() {
+        executorService.shutdown();
+        appDatabase.close();
     }
 }

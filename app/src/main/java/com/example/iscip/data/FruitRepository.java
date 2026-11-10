@@ -7,5 +7,5 @@ import java.util.List;
 public interface FruitRepository {
 
     void getAll(TaskCallback<List<Fruit>> callback);
-    void add(Fruit fruit, TaskCallback<Void> callback);
+    void add(Fruit fruit, TaskCallback<Boolean> callback);
 }
