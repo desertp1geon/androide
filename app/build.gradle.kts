@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.google.gms.google.services)
+    alias(libs.plugins.google.firebase.crashlytics)
 }
 
 android {
@@ -40,6 +42,7 @@ android {
 dependencies {
     implementation("io.insert-koin:koin-core:4.1.0")
     implementation("io.insert-koin:koin-android:4.1.0")
+    implementation(libs.firebase.crashlytics)
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     implementation("androidx.room:room-runtime:2.6.1")

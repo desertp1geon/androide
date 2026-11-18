@@ -62,6 +62,10 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+    public void onCallErrorClick(View view) {
+        throw new RuntimeException("Test Crash");
+    }
+
     private void observeViewModel() {
 
         viewModel.getFruits().observe(this, fruits -> {

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "355181330796",
+    "project_id": "iscip-23-15",
+    "storage_bucket": "iscip-23-15.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:355181330796:android:e34a419936fb2806b7f349",
+        "android_client_info": {
+          "package_name": "com.example.iscip"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwdRhNrBonNMiGRfB9Rxp9MWaImPRlT5M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

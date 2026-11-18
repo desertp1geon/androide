@@ -61,11 +61,24 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fruitsRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="282dp"
             android:layout_marginTop="16dp"
+            android:layout_weight="1"
             android:clipToPadding="false"
             android:paddingBottom="12dp" />
+
+        <Button
+            android:id="@+id/callErrorButton"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="#3D7048"
+            android:text="Call Error"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:onClick="onCallErrorClick"/>
 
     </LinearLayout>
 
